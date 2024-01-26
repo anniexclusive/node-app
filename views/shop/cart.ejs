@@ -1,11 +1,47 @@
 <%- include('../partials/head.ejs') %>
     <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
     <%- include('../partials/navigation.ejs') %>
     <main>
         <h1>Cart page</h1>
+        <p>&nbsp;</p>
+        <% if (cart.length > 0 ) {%>
+            <table class="table" style="width: 40%;">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Product Details</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <% cart.forEach(p => { %>
+                    <tr>
+                        <td style="width: 15%;">
+                            <img src="<%= p.productData.imageUrl %>" width="100px" alt="<%= p.productData.title %>">
+                        </td>
+                        <td>
+                            <p><%= p.productData.title %></p>                            
+                            <p><%= p.productData.description %></p>                            
+                        </td>
+                        <td>
+                            <p><%= p.qty %></p>
+                        </td>
+                        <td>
+                            <form action="/cart-delete-item" method="POST">
+                                <input type="hidden" name="productId" value="<%= p.productData.id %>">
+                                <button type="submit" class="btn">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+                </table>
+        <% } else {%>
+            <p>Cart is empty</p>
+        <% } %>
     </main>
 
 <%- include('../partials/end.ejs') %>

@@ -1,0 +1,22 @@
+<%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <%- include('../partials/navigation.ejs') %>
+    <main class="centered">
+        <% if (product) { %>
+            <h1><%= product.title %> </h1>
+            <hr>
+            <div>
+                <img src="<%= product.imageUrl %>" height="350px" alt="<%= product.title %>">
+            </div>
+            <h2>$<%= product.price %></h2>
+            <p><%= product.description %></p>
+            <%- include('../partials/add-to-cart.ejs') %>
+        <% } else {%>
+            <h1>No Product found!</h1>
+        <% } %>
+    </main>
+
+<%- include('../partials/end.ejs') %>
