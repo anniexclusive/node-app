@@ -21,23 +21,35 @@
                 <% cart.forEach(p => { %>
                     <tr>
                         <td style="width: 15%;">
-                            <img src="<%= p.productData.imageUrl %>" width="100px" alt="<%= p.productData.title %>">
+                            <img src="<%= p.imageUrl %>" width="100px" alt="<%= p.title %>">
                         </td>
                         <td>
-                            <p><%= p.productData.title %></p>                            
-                            <p><%= p.productData.description %></p>                            
+                            <p><%= p.title %></p>                            
+                            <p><%= p.description %></p>                            
                         </td>
                         <td>
-                            <p><%= p.qty %></p>
+                            <p><%= p.cartItem.quantity %></p>
                         </td>
                         <td>
                             <form action="/cart-delete-item" method="POST">
-                                <input type="hidden" name="productId" value="<%= p.productData.id %>">
+                                <input type="hidden" name="productId" value="<%= p.id %>">
                                 <button type="submit" class="btn">Delete</button>
                             </form>
                         </td>
                     </tr>
                 <% }) %>
+                <tfoot>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">
+                            <form action="/create-order" method="POST">
+                                <button type="submit" class="btn">Order Now</button>
+                            </form>
+                        </th>
+                    </tr>
+                </tfoot>
                 </table>
         <% } else {%>
             <p>Cart is empty</p>

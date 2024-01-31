@@ -5,7 +5,45 @@
 <body>
     <%- include('../partials/navigation.ejs') %>
     <main>
+        <% if (orders.length > 0) { %>
+            <table class="table" style="width: 40%;">
+                <thead class="thead-light">
+                    <tr style="background-color: #b4cdbd;">
+                        <th scope="col"></th>
+                        <th scope="col">Product Details</th>
+                        <th scope="col">Quantity</th>
+                    </tr>
+                </thead>
+                <% orders.forEach(order => { %>
+                    <tr>
+                        <td>
+                            <p><%= order.id %></p>                 
+                        </td>
+                        <td colspan="3">
+                            <table class="table" style="width: 100%;">
+                                
+                                <% order.products.forEach(product => { %>
+                                    <tr>
+                                        <td style="width: 15%;">
+                                            <img src="<%= product.imageUrl %>" width="100px" alt="<%= product.title %>">
+                                        </td>
+                                        <td>
+                                            <p><%= product.title %></p>                            
+                                            <p><%= product.description %></p>                            
+                                        </td>
+                                        <td class="centered">
+                                            <p><%= product.orderItem.quantity %></p>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </table>
+                        </td>
+                    </tr>
+                <% }) %>
+                </table>
+        <% } else {%>
         <h1>Nothing there</h1>
+        <% } %>
     </main>
 
 <%- include('../partials/end.ejs') %>
